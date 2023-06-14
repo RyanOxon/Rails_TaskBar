@@ -1,0 +1,43 @@
+<h1>Boas-vindas à Task List!</h1>
+<h3>Sua lista de tarefas:
+<%= link_to 'Novo', new_task_path, method: :get %></h3>
+<table border = '1'>  
+  <colgroup>
+    <col style="width: 70%">
+    <col style="width: 1%">
+    <col style="width: 5%">
+    <col style="width: 5%">
+  </colgroup>
+  <tr>
+    <th>Descrição </th>
+    <th>Concluida</th>
+    <th>Editar</th>
+    <th>Apagar</th>
+  </tr>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.description %></td>
+      <td style="text-align: center "><%= check_box_tag 'task[status]', false, task.status == true, disabled: true, class: 'check_box' %></td>
+      <td><%= link_to 'Abrir', task_path(task) %></td>
+      <td><%= button_to 'Apagar', task_path(task), method: :delete,
+          form: {data: { turbo_confirm: 'Quer apagar esta tarefa?'} } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    text-align: left;
+    padding: 5px;
+  }
+  tr:nth-child(odd) {background-color: #f2f2f2;}
+  .check_box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+  }
+</style>

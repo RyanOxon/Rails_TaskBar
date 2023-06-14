@@ -1,0 +1,8 @@
+<h1> Sua Task </h1>
+<h3> <%= @task.description %> </h3>
+<%= @task.status %>
+
+<%= button_to 'Nova Task', new_task_path, method: :get %>
+<%= button_to 'Voltar', tasks_path, method: :get %>
+<%= button_to 'Editar', edit_task_path(@task), method: :get %>
+<%= button_to 'Apagar', task_path(@task), method: :delete, form: {data: { turbo_confirm: 'Quer apagar esta tarefa?'}} %>
